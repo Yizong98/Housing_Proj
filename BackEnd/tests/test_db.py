@@ -24,7 +24,6 @@ class TestDbOperations(unittest.TestCase):
         self.assertEqual(is_exist, True)
 
     def test_add_user(self):
-        
         user_name = "cris"
         user_email = "haha@ucsd.edu"
         created_time = datetime.now()
@@ -34,13 +33,13 @@ class TestDbOperations(unittest.TestCase):
         user_major = "Data Science"
 
         user_object = crud.add_user(
-            user_name, 
+            user_name,
             user_email,
-            created_time, 
+            created_time,
             user_phone,
             user_description,
             user_school_year,
-            user_major, 
+            user_major,
             self.session)
 
         # check if the return object has correct information
@@ -54,8 +53,8 @@ class TestDbOperations(unittest.TestCase):
 
         # check if the user is loaded into the database
         query_object = crud.get_row_if_exists(
-            User, 
-            self.session, 
+            User,
+            self.session,
             **{'email': user_email})
 
         self.assertEqual(query_object == user_object, True)
@@ -64,8 +63,8 @@ class TestDbOperations(unittest.TestCase):
         from_month = datetime(2018, 6, 1)
         to_month = datetime(2018, 7, 1)
         stay_period_object = crud.add_stay_period(
-            from_month, 
-            to_month, 
+            from_month,
+            to_month,
             self.session)
 
         # check if the return object has correct information
@@ -88,8 +87,8 @@ class TestDbOperations(unittest.TestCase):
         address = "75 Big Rock Cove St.Middletown, NY 10940"
         distance = "20 mins"
         address_object = crud.add_address(
-            distance, 
-            address, 
+            distance,
+            address,
             self.session)
 
         # check if the return object has correct information
@@ -111,8 +110,8 @@ class TestDbOperations(unittest.TestCase):
     def test_add_attribute(self):
         name, category = others[0], "other"
         attribute_object = crud.add_attribute(
-            name, 
-            category, 
+            name,
+            category,
             self.session)
 
         # check if the return object has correct information
@@ -133,8 +132,8 @@ class TestDbOperations(unittest.TestCase):
 
         # check duplicate handling
         attribute_object = crud.add_attribute(
-            name, 
-            category, 
+            name,
+            category,
             self.session)
 
         number_of_rows = self.session.query(Attribute).count()
@@ -145,24 +144,24 @@ class TestDbOperations(unittest.TestCase):
 
         # create an attribute (Single Case)
         attribute_object = crud.add_attribute(
-            name, 
-            category, 
+            name,
+            category,
             self.session)
 
         # create a stay period
         from_month = datetime(2018, 6, 1)
         to_month = datetime(2018, 7, 1)
         stay_period_object = crud.add_stay_period(
-            from_month, 
-            to_month, 
+            from_month,
+            to_month,
             self.session)
 
         # create an address
         address = "75 Big Rock Cove St.Middletown, NY 10940"
         distance = "20 mins"
         address_object = crud.add_address(
-            distance, 
-            address, 
+            distance,
+            address,
             self.session)
 
         # create an user
@@ -174,21 +173,21 @@ class TestDbOperations(unittest.TestCase):
         user_school_year = "Third"
         user_major = "Data Science"
         user_object = crud.add_user(
-            user_name, 
+            user_name,
             user_email,
-            created_time, 
+            created_time,
             user_phone,
-            user_description, 
+            user_description,
             user_school_year,
-            user_major, 
+            user_major,
             self.session)
 
         # create a move in
         early_date = datetime(2018, 6, 1)
         late_date = datetime(2018, 6, 12)
         move_in_object = crud.add_move_in(
-            early_date, 
-            late_date, 
+            early_date,
+            late_date,
             self.session)
 
         # create a room
@@ -201,7 +200,7 @@ class TestDbOperations(unittest.TestCase):
         no_bathrooms = 2
         room_object = crud.add_room(
             date_created,
-            room_type, 
+            room_type,
             price,
             negotiable,
             description,
@@ -233,13 +232,13 @@ class TestDbOperations(unittest.TestCase):
 
         # create a second attribute
         attribute_object = crud.add_attribute(
-            name, 
-            category, 
+            name,
+            category,
             self.session)
 
         house_attribute_object = crud.add_house_attribute(
-            room_object, 
-            attribute_object, 
+            room_object,
+            attribute_object,
             self.session)
 
         # check if the return object has correct information
@@ -253,8 +252,8 @@ class TestDbOperations(unittest.TestCase):
 
         # check duplicate handling
         house_attribute_object = crud.add_house_attribute(
-            room_object, 
-            attribute_object, 
+            room_object,
+            attribute_object,
             self.session)
 
         number_of_rows = self.session.query(House_Attribute).count()
@@ -283,24 +282,24 @@ class TestDbOperations(unittest.TestCase):
         early_date = datetime(2018, 6, 1)
         late_date = datetime(2018, 6, 12)
         move_in_object = crud.add_move_in(
-            early_date, 
-            late_date, 
+            early_date,
+            late_date,
             self.session)
 
         # create a stay period
         from_month = datetime(2018, 6, 1)
         to_month = datetime(2018, 7, 1)
         stay_period_object = crud.add_stay_period(
-            from_month, 
-            to_month, 
+            from_month,
+            to_month,
             self.session)
 
         # create an address
         address = "75 Big Rock Cove St. Middletown, NY 10940"
         distance = "20 mins"
         address_object = crud.add_address(
-            distance, 
-            address, 
+            distance,
+            address,
             self.session)
 
         # create a room
@@ -313,7 +312,7 @@ class TestDbOperations(unittest.TestCase):
         no_bathrooms = 2
         room_object = crud.add_room(
             date_created,
-            room_type, 
+            room_type,
             price,
             negotiable,
             description,
@@ -327,8 +326,8 @@ class TestDbOperations(unittest.TestCase):
 
         # connect bookmark with the room and user
         bookmark_object = crud.add_bookmark(
-            room_object, 
-            user_object, 
+            room_object,
+            user_object,
             self.session)
 
         # check if the return object has correct information
@@ -337,8 +336,8 @@ class TestDbOperations(unittest.TestCase):
 
         # check duplicate handling
         bookmark_object = crud.add_bookmark(
-            room_object, 
-            user_object, 
+            room_object,
+            user_object,
             self.session)
 
         number_of_rows = self.session.query(Bookmark).count()
@@ -346,16 +345,16 @@ class TestDbOperations(unittest.TestCase):
 
         # check delete
         crud.remove_bookmark(
-            room_object, 
-            user_object, 
+            room_object,
+            user_object,
             self.session)
 
         number_of_rows = self.session.query(Bookmark).count()
         self.assertEqual(number_of_rows == 0, True)
 
         crud.remove_bookmark(
-            room_object, 
-            user_object, 
+            room_object,
+            user_object,
             self.session)
 
         number_of_rows = self.session.query(Bookmark).count()
@@ -372,27 +371,27 @@ class TestDbOperations(unittest.TestCase):
 
         # check if it the method detects no users
         query_object = crud.get_row_if_exists(
-            User, 
-            self.session, 
+            User,
+            self.session,
             **{'email': user_email})
 
         self.assertEqual(query_object is None, True)
 
         # add the user
         user_object = crud.add_user(
-            user_name, 
+            user_name,
             user_email,
-            created_time, 
+            created_time,
             user_phone,
-            user_description, 
+            user_description,
             user_school_year,
-            user_major, 
+            user_major,
             self.session)
 
         # check if it the method detects an user
         query_object = crud.get_row_if_exists(
-            User, 
-            self.session, 
+            User,
+            self.session,
             **{'email': user_email})
 
         self.assertEqual(query_object == user_object, True)
@@ -408,37 +407,37 @@ class TestDbOperations(unittest.TestCase):
         user_school_year = "Third"
         user_major = "Data Science"
         user_object = crud.add_user(
-            user_name, 
+            user_name,
             user_email,
-            created_time, 
+            created_time,
             user_phone,
-            user_description, 
+            user_description,
             user_school_year,
-            user_major, 
+            user_major,
             self.session)
 
         # create a move in
         early_date = datetime(2018, 6, 1)
         late_date = datetime(2018, 6, 12)
         move_in_object = crud.add_move_in(
-            early_date, 
-            late_date, 
+            early_date,
+            late_date,
             self.session)
 
         # create a stay period
         from_month = datetime(2018, 6, 1)
         to_month = datetime(2018, 7, 1)
         stay_period_object = crud.add_stay_period(
-            from_month, 
-            to_month, 
+            from_month,
+            to_month,
             self.session)
 
         # create an address
         address = "75 Big Rock Cove St.Middletown, NY 10940"
         distance = "20 mins"
         address_object = crud.add_address(
-            distance, 
-            address, 
+            distance,
+            address,
             self.session)
 
         # create a room
@@ -450,44 +449,44 @@ class TestDbOperations(unittest.TestCase):
         no_rooms = 2
         no_bathrooms = 2
         room_object = crud.add_room(
-            date_created, 
-            room_type, 
+            date_created,
+            room_type,
             price,
-            negotiable, 
+            negotiable,
             description,
-            stay_period_object, 
+            stay_period_object,
             address_object,
-            user_object, 
+            user_object,
             move_in_object,
-            no_rooms, 
+            no_rooms,
             no_bathrooms,
             self.session)
 
         room_object = crud.add_room(
-            date_created, 
-            room_type, 
+            date_created,
+            room_type,
             price,
-            negotiable, 
+            negotiable,
             description,
-            stay_period_object, 
+            stay_period_object,
             address_object,
-            user_object, 
+            user_object,
             move_in_object,
-            no_rooms, 
+            no_rooms,
             no_bathrooms,
             self.session)
 
         room_object = crud.add_room(
-            date_created, 
-            room_type, 
+            date_created,
+            room_type,
             price,
-            negotiable, 
+            negotiable,
             description,
-            stay_period_object, 
+            stay_period_object,
             address_object,
-            user_object, 
+            user_object,
             move_in_object,
-            no_rooms, 
+            no_rooms,
             no_bathrooms,
             self.session)
 
@@ -503,37 +502,37 @@ class TestDbOperations(unittest.TestCase):
         user_school_year = "Grad"
         user_major = "Computer Science"
         user_object = crud.add_user(
-            user_name, 
+            user_name,
             user_email,
-            created_time, 
+            created_time,
             user_phone,
-            user_description, 
+            user_description,
             user_school_year,
-            user_major, 
+            user_major,
             self.session)
 
         # create a move in
         early_date = datetime(2018, 8, 1)
         late_date = datetime(2018, 10, 12)
         move_in_object = crud.add_move_in(
-            early_date, 
-            late_date, 
+            early_date,
+            late_date,
             self.session)
 
         # create a stay period
         from_month = datetime(2018, 10, 1)
         to_month = datetime(2019, 10, 1)
         stay_period_object = crud.add_stay_period(
-            from_month, 
-            to_month, 
+            from_month,
+            to_month,
             self.session)
 
         # create an address
         address = "75 Big Rock Cove St.Middletown, NY 10940"
         distance = "20 mins"
         address_object = crud.add_address(
-            distance, 
-            address, 
+            distance,
+            address,
             self.session)
 
         # create a room
@@ -545,16 +544,16 @@ class TestDbOperations(unittest.TestCase):
         no_rooms = 4
         no_bathrooms = 5
         room_object = crud.add_room(
-            date_created, 
-            room_type, 
+            date_created,
+            room_type,
             price,
-            negotiable, 
+            negotiable,
             description,
-            stay_period_object, 
+            stay_period_object,
             address_object,
-            user_object, 
+            user_object,
             move_in_object,
-            no_rooms, 
+            no_rooms,
             no_bathrooms,
             self.session)
 
@@ -571,37 +570,37 @@ class TestDbOperations(unittest.TestCase):
         user_school_year = "Third"
         user_major = "Data Science"
         user_object = crud.add_user(
-            user_name, 
+            user_name,
             user_email,
-            created_time, 
+            created_time,
             user_phone,
-            user_description, 
+            user_description,
             user_school_year,
-            user_major, 
+            user_major,
             self.session)
 
         # create a move in
         early_date = datetime(2018, 6, 1)
         late_date = datetime(2018, 6, 12)
         move_in_object = crud.add_move_in(
-            early_date, 
-            late_date, 
+            early_date,
+            late_date,
             self.session)
 
         # create a stay period
         from_month = datetime(2018, 6, 1)
         to_month = datetime(2018, 7, 1)
         stay_period_object = crud.add_stay_period(
-            from_month, 
-            to_month, 
+            from_month,
+            to_month,
             self.session)
 
         # create an address
         address = "75 Big Rock Cove St.Middletown, NY 10940"
         distance = "20 mins"
         address_object = crud.add_address(
-            distance, 
-            address, 
+            distance,
+            address,
             self.session)
 
         # create a room
@@ -613,32 +612,32 @@ class TestDbOperations(unittest.TestCase):
         no_rooms = 2
         no_bathrooms = 2
         room_object = crud.add_room(
-            date_created, 
-            room_type, 
+            date_created,
+            room_type,
             price,
-            negotiable, 
+            negotiable,
             description,
-            stay_period_object, 
+            stay_period_object,
             address_object,
-            user_object, 
+            user_object,
             move_in_object,
-            no_rooms, 
+            no_rooms,
             no_bathrooms,
             self.session)
 
         result_json = crud.room_json(
-            room_object, 
-            self.session, 
+            room_object,
+            self.session,
             True)
 
         self.assertEqual(result_json["name"] ==
                          "75 Big Rock Cove St.Middletown", True)
-        self.assertEqual(result_json["location"] == address, True)
+        self.assertEqual(result_json["address"] == address, True)
         self.assertEqual(result_json["pricePerMonth"] == price, True)
         self.assertEqual(result_json["from_month"] == "June/18", True)
         self.assertEqual(result_json["to_month"] == "July/18", True)
-        self.assertEqual(result_json["early"] == "06/01/18", True)
-        self.assertEqual(result_json["late"] == "06/12/18", True)
+        self.assertEqual(result_json["early_date"] == "06/01/18", True)
+        self.assertEqual(result_json["late_date"] == "06/12/18", True)
         self.assertEqual(result_json["roomType"] == room_type, True)
         self.assertEqual(result_json["other"] == [], True)
         self.assertEqual(result_json["facilities"] == [], True)
@@ -661,47 +660,47 @@ class TestDbOperations(unittest.TestCase):
 
         # create an attribute
         attribute_object = crud.add_attribute(
-            name, 
-            category, 
+            name,
+            category,
             self.session)
 
         # connect room with the attribute
         house_attribute_object = crud.add_house_attribute(
-            room_object, 
-            attribute_object, 
+            room_object,
+            attribute_object,
             self.session)
 
         name, category = others[1], "other"
 
         # create an attribute
         attribute_object = crud.add_attribute(
-            name, 
-            category, 
+            name,
+            category,
             self.session)
 
         # connect room with the attribute
         house_attribute_object = crud.add_house_attribute(
-            room_object, 
-            attribute_object, 
+            room_object,
+            attribute_object,
             self.session)
 
         name, category = facilities[0], "facilities"
 
         # create an attribute
         attribute_object = crud.add_attribute(
-            name, 
-            category, 
+            name,
+            category,
             self.session)
 
         # connect room with the attribute
         house_attribute_object = crud.add_house_attribute(
-            room_object, 
-            attribute_object, 
+            room_object,
+            attribute_object,
             self.session)
 
         result_json = crud.room_json(
-            room_object, 
-            self.session, 
+            room_object,
+            self.session,
             True)
 
         self.assertEqual(result_json["other"] == [others[0], others[1]], True)
@@ -711,10 +710,10 @@ class TestDbOperations(unittest.TestCase):
         early_date = datetime(2018, 6, 1)
         late_date = datetime(2018, 8, 1)
         move_in_object = crud.add_move_in(
-            early_date, 
-            late_date, 
+            early_date,
+            late_date,
             self.session)
-        
+
         # check if return object has correct info
         self.assertEqual(move_in_object.early_date, early_date)
         self.assertEqual(move_in_object.late_date, late_date)
@@ -731,112 +730,60 @@ class TestDbOperations(unittest.TestCase):
         number_of_rows = self.session.query(Move_In).count()
         self.assertEqual(number_of_rows == 1, True)
 
-    # def test_write_room(self):
-    #     # create an user
-    #     user_name = "cris"
-    #     user_email = "haha@ucsd.edu"
-    #     created_time = datetime.now()
-    #     user_phone = "858-2867-3567"
-    #     user_description = "cultured man"
-    #     user_school_year = "Third"
-    #     user_major = "Data Science"
-    #     user_object = crud.add_user(
-    #         user_name, 
-    #         user_email,
-    #         created_time, 
-    #         user_phone,
-    #         user_description, 
-    #         user_school_year,
-    #         user_major, 
-    #         self.session)
+    def test_write_room(self):
+        # create an user
+        user_name = "cris"
+        user_email = "haha@ucsd.edu"
+        created_time = datetime.now()
+        user_phone = "858-2867-3567"
+        user_description = "cultured man"
+        user_school_year = "Third"
+        user_major = "Data Science"
+        user_object = crud.add_user(
+            user_name,
+            user_email,
+            created_time,
+            user_phone,
+            user_description,
+            user_school_year,
+            user_major,
+            self.session)
 
-    #     # create a move in
-    #     early_date = datetime(2018, 6, 1)
-    #     late_date = datetime(2018, 6, 12)
-    #     move_in_object = crud.add_move_in(
-    #         early_date, 
-    #         late_date, 
-    #         self.session)
+        # the input json should be the same as output json from room_json except for id
+        test_json = {'name': '75 Big Rock Cove St. Middletown',
+                     'address': '75 Big Rock Cove St. Middletown, NY 10940',
+                     'distance': '20 mins', 'pricePerMonth': 500,
+                     'from_month': 'June/18', 'to_month': 'July/18',
+                     'early_date': '06/01/18', 'late_date': '06/12/18',
+                     'roomType': 'Single', 'other': [], 'facilities': [],
+                     'leaserName': 'cris', 'leaserEmail': 'haha@ucsd.edu',
+                     'leaserPhone': '858-2867-3567',
+                     'leaserSchoolYear': 'Third',
+                     'leaserMajor': 'Data Science',
+                     'photos': ['photo1', 'photo2'],
+                     'profilePhoto': 'profile_photo',
+                     'negotiable': True,
+                     'numBaths': 2.5,
+                     'numBeds': 2,
+                     'roomDescription': 'dream house in a life time'}
 
-    #     # create a stay period
-    #     from_month = datetime(2018, 6, 1)
-    #     to_month = datetime(2018, 7, 1)
-    #     stay_period_object = crud.add_stay_period(
-    #         from_month, 
-    #         to_month, 
-    #         self.session)
+        crud.write_room(test_json, self.session, True)
 
-    #     # create an address
-    #     address = "75 Big Rock Cove St. Middletown, NY 10940"
-    #     distance = "20 mins"
-    #     address_object = crud.add_address(
-    #         distance, 
-    #         address, 
-    #         self.session)
+        room_object = crud.get_row_if_exists(
+            Room,
+            self.session,
+            **{'id': 1})
 
-    #     # create a room
-    #     date_created = datetime.now()
-    #     room_type = room_types[0]
-    #     price = 500
-    #     negotiable = True
-    #     description = "dream house in a life time"
-    #     no_rooms = 2
-    #     no_bathrooms = 2
-    #     room_object = crud.add_room(
-    #         date_created, 
-    #         room_type, 
-    #         price,
-    #         negotiable, 
-    #         description,
-    #         stay_period_object, 
-    #         address_object,
-    #         user_object, 
-    #         move_in_object,
-    #         no_rooms, 
-    #         no_bathrooms,
-    #         self.session)
+        self.assertEqual(room_object is not None, True)
 
-    #     result_json = crud.room_json(
-    #         room_object, 
-    #         self.session, 
-    #         True)
+        result_json = crud.room_json(
+            room_object,
+            self.session,
+            True)
 
-    #     print(result_json)
+        test_json['roomId'] = 1
 
-    #     # TODO: put this into a delete_room method in crud
-    #     self.session.query(Room).filter(Room.user == user_object).delete()
-
-    #     crud.write_room(result_json, self.session)
-
-    #     room_object = crud.get_row_if_exists(
-    #         Room,
-    #         self.session,
-    #         **{'price': price})
-        
-    #     self.assertEqual(result_json["name"] ==
-    #                      "75 Big Rock Cove St. Middletown", True)
-    #     self.assertEqual(result_json["location"] == address, True)
-    #     self.assertEqual(result_json["pricePerMonth"] == price, True)
-    #     self.assertEqual(result_json["from_month"] == "June/18", True)
-    #     self.assertEqual(result_json["to_month"] == "July/18", True)
-    #     self.assertEqual(result_json["early"] == "06/01/18", True)
-    #     self.assertEqual(result_json["late"] == "06/12/18", True)
-    #     self.assertEqual(result_json["roomType"] == room_type, True)
-    #     self.assertEqual(result_json["other"] == [], True)
-    #     self.assertEqual(result_json["facilities"] == [], True)
-    #     self.assertEqual(result_json["leaserName"] == user_name, True)
-    #     self.assertEqual(result_json["leaserEmail"] == user_email, True)
-    #     self.assertEqual(result_json["leaserPhone"] == user_phone, True)
-    #     self.assertEqual(
-    #         result_json["leaserSchoolYear"] == user_school_year, True)
-    #     self.assertEqual(result_json["leaserMajor"] == user_major, True)
-    #     self.assertEqual(result_json["photos"] == ["photo1", "photo2"], True)
-    #     self.assertEqual(result_json["profilePhoto"] == "profile_photo", True)
-    #     self.assertEqual(result_json["roomId"] == room_object.id, True)
-    #     self.assertEqual(result_json["negotiable"] == negotiable, True)
-    #     self.assertEqual(result_json["numBaths"] == no_rooms, True)
-    #     self.assertEqual(result_json["numBeds"] == no_bathrooms, True)
-    #     self.assertEqual(result_json["roomDescription"] == description, True)
+        self.assertEqual(result_json == test_json, True)
 
     def test_write_attribute(self):
         # create an user
@@ -848,37 +795,37 @@ class TestDbOperations(unittest.TestCase):
         user_school_year = "Third"
         user_major = "Data Science"
         user_object = crud.add_user(
-            user_name, 
+            user_name,
             user_email,
-            created_time, 
+            created_time,
             user_phone,
-            user_description, 
+            user_description,
             user_school_year,
-            user_major, 
+            user_major,
             self.session)
 
         # create a move in
         early_date = datetime(2018, 6, 1)
         late_date = datetime(2018, 6, 12)
         move_in_object = crud.add_move_in(
-            early_date, 
-            late_date, 
+            early_date,
+            late_date,
             self.session)
 
         # create a stay period
         from_month = datetime(2018, 6, 1)
         to_month = datetime(2018, 7, 1)
         stay_period_object = crud.add_stay_period(
-            from_month, 
-            to_month, 
+            from_month,
+            to_month,
             self.session)
 
         # create an address
         address = "75 Big Rock Cove St.Middletown, NY 10940"
         distance = "20 mins"
         address_object = crud.add_address(
-            distance, 
-            address, 
+            distance,
+            address,
             self.session)
 
         # create a room
@@ -890,46 +837,47 @@ class TestDbOperations(unittest.TestCase):
         no_rooms = 2
         no_bathrooms = 2
         room_object = crud.add_room(
-            date_created, 
-            room_type, 
+            date_created,
+            room_type,
             price,
-            negotiable, 
+            negotiable,
             description,
-            stay_period_object, 
+            stay_period_object,
             address_object,
-            user_object, 
+            user_object,
             move_in_object,
-            no_rooms, 
+            no_rooms,
             no_bathrooms,
             self.session)
 
         room_object = crud.add_room(
-            date_created, 
-            room_type, 
+            date_created,
+            room_type,
             price,
-            negotiable, 
+            negotiable,
             description,
-            stay_period_object, 
+            stay_period_object,
             address_object,
-            user_object, 
+            user_object,
             move_in_object,
-            no_rooms, 
+            no_rooms,
             no_bathrooms,
             self.session)
 
         crud.write_attribute(
-            facilities[0:3], 
-            'facilities', 
-            room_object, 
+            facilities[0:3],
+            'facilities',
+            room_object,
             self.session)
-        
+
         count = self.session.query(House_Attribute).count()
         self.assertEqual(count == 3, True)
 
         categories = self.session.query(Attribute.category).distinct().all()
         self.assertEqual(categories[0][0] == 'facilities', True)
-        
-        names = set([result[0] for result in self.session.query(Attribute.name).all()])
+
+        names = set([result[0]
+                     for result in self.session.query(Attribute.name).all()])
         self.assertEqual(names == set(facilities[0:3]), True)
 
     def test_update_field(self):
@@ -942,28 +890,29 @@ class TestDbOperations(unittest.TestCase):
         user_school_year = "Third"
         user_major = "Data Science"
         user_object = crud.add_user(
-            user_name, 
+            user_name,
             user_email,
-            created_time, 
+            created_time,
             user_phone,
-            user_description, 
+            user_description,
             user_school_year,
-            user_major, 
+            user_major,
             self.session)
-        
+
         # change description
         crud.update_field(
-            User, 
-            self.session, 
-            {'email': 'haha@ucsd.edu'}, 
-            {'description':'google man'})
+            User,
+            self.session,
+            {'email': 'haha@ucsd.edu'},
+            {'description': 'google man'})
 
         user_object = crud.get_row_if_exists(
             User,
             self.session,
             **{'email': 'haha@ucsd.edu'})
-        
+
         self.assertEqual(user_object.description == 'google man', True)
+
 
 if __name__ == '__main__':
     unittest.main()
