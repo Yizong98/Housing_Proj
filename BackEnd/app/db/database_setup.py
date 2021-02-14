@@ -1,9 +1,12 @@
 import os
+import sys
 from sqlalchemy import create_engine
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, ForeignKey, Integer, String, FLOAT, DateTime, \
     Boolean
+
+sys.path.insert(0, os.path.dirname(__file__))
 
 Base = declarative_base()
 
@@ -44,15 +47,16 @@ class Room(Base):
     price = Column(Integer, nullable=False)
     negotiable = Column(Boolean, nullable=False)
     description = Column(String(1000), nullable=False)
-    stay_period = Column(String(250), nullable=False)
     move_in_id = Column(Integer, ForeignKey("move_in.id"))
     address_id = Column(Integer, ForeignKey("address.id"))
+    stay_period_id = Column(Integer, ForeignKey("stay_period.id"))
     no_rooms = Column(Integer, nullable=False)
     no_bathrooms = Column(FLOAT, nullable=False)
     house_attribute = relationship("House_Attribute", backref="room")
     move_in = relationship("Move_In", backref="room")
     bookmark = relationship("Bookmark", backref="room")
     address = relationship("Address", backref="room")
+    stay_period = relationship("Stay_Period", backref="room")
 
     @property
     def serialize(self):
@@ -64,7 +68,6 @@ class Room(Base):
             'price': self.price,
             'negotiable': self.negotiable,
             'description': self.description,
-            'stay_period': self.stay_period,
             'no_rooms': self.no_rooms,
             'no_bathrooms': self.no_bathrooms
         }
@@ -86,24 +89,36 @@ class Address(Base):
         }
 
 
-class Move_In(Base):
-    __tablename__ = 'move_in'
-
+class Stay_Period(Base):
+    __tablename__ = 'stay_period'
     id = Column(Integer, primary_key=True)
-    early_interval = Column(String(250), nullable=False)
-    early_month = Column(String(250), nullable=False)
-    late_interval = Column(String(250), nullable=False)
-    late_month = Column(String(250), nullable=False)
+    from_month = Column(DateTime, nullable=False)
+    to_month = Column(DateTime, nullable=False)
 
     @property
     def serialize(self):
         """Return object data in easily serializeable format"""
         return {
             'id': self.id,
-            'early_interval': self.early_interval,
-            'early_month': self.early_month,
-            'late_interval': self.late_interval,
-            'late_month': self.late_month
+            'from_month': self.from_month,
+            'to_month': self.to_month,
+        }
+
+
+class Move_In(Base):
+    __tablename__ = 'move_in'
+
+    id = Column(Integer, primary_key=True)
+    early_date = Column(DateTime, nullable=False)
+    late_date = Column(DateTime, nullable=False)
+
+    @property
+    def serialize(self):
+        """Return object data in easily serializeable format"""
+        return {
+            'id': self.id,
+            'early_date': self.early_date,
+            'late_date': self.late_date,
         }
 
 
@@ -158,7 +173,18 @@ class Bookmark(Base):
         }
 
 
-if __name__ == '__main__':
-    engine = create_engine('sqlite:///housing.db')
+def createDB(db_path):
+    """
+    create a DB given the database schema
+    return True if the db is created successfully
+    """
+    try:
+        engine = create_engine(db_path)
+        Base.metadata.create_all(engine)
+        return True
+    except:
+        return False
 
-    Base.metadata.create_all(engine)
+
+if __name__ == '__main__':
+    print(createDB('sqlite:///housing.db'))

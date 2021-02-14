@@ -4,7 +4,8 @@ import { useDispatch } from 'react-redux';
 import NavBar from './components/NavBar';
 import Home from './components/Home';
 import Landing from './components/Landing';
-import { setUser } from './redux/slices/auth';
+import DateSelecter from './components/DateSelecter';
+import Monthelecter from './components/MonthSelecter';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 function App() {
@@ -24,6 +25,8 @@ function App() {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/landing" component={Landing} />
+          <Route exact path="/calendar" component={DateSelecter} />
+          <Route exact path="/month_picker" component={Monthelecter} />
         </Switch>
       </div>
     </Router>
