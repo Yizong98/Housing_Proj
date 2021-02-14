@@ -1,6 +1,6 @@
 from flask import current_app, Blueprint, request, \
     jsonify, session as login_session, Response
-from app.db.crud import check_exist, add_user
+from app.db.crud import get_row_if_exists, add_user
 from app.db.database_setup import User
 from datetime import datetime
 from app.util.util import generateResponse
@@ -23,7 +23,7 @@ def login():
     requested_json = request.json
     # check in with db to see if user is new
     session = current_app.config['DB_CONNECTION']
-    user = check_exist(User, session, **{'email': requested_json['email']})
+    user = get_row_if_exists(User, session, **{'email': requested_json['email']})
     if not user:
         # User doesn't exist
         # maybe also do: , 'access_token': access_token
@@ -70,7 +70,7 @@ def create_user():
     if request.method == 'OPTIONS':
         return generateResponse()
     requested_json = request.json
-    if check_exist(User, session, **{'email': requested_json['email']}):
+    if get_row_if_exists(User, session, **{'email': requested_json['email']}):
         message, status = 'Already Created', 200
         return generateResponse(elem=message, status=status)
 
