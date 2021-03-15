@@ -27,6 +27,7 @@ def add_and_commit(db_row, session):
 
 # Create
 
+
 def add_user(name, email, date_created, phone, description, school_year, major,
              session):
     '''
@@ -38,6 +39,16 @@ def add_user(name, email, date_created, phone, description, school_year, major,
                        major=major)
     add_and_commit(User_to_add, session)
     return User_to_add
+
+
+def add_address(distance, address, session):
+    '''
+    add a row to the Address table
+    '''
+    address_to_add = Address(address=address, distance=distance)
+    add_and_commit(address_to_add, session)
+    return address_to_add
+
 
 def add_address(distance, address, session):
     '''
@@ -139,6 +150,7 @@ def add_bookmark(room, user, session):
 
 # Read
 
+
 def get_row_if_exists(db_obj, session, **condition):
     """
     Check if a row that satisfies a certain condition exists
@@ -228,6 +240,7 @@ def update_field(db_obj, session, condition={}, values={}):
 
 # write an attribute to database
 
+
 def write_attribute(attributes, category, room, session):
     '''
     Posted when user posts a room. 
@@ -291,6 +304,7 @@ def write_room(room_json, session, test_mode=False):
 
 # DELETE
 
+
 def remove_bookmark(room, user, session):
     '''
     de-associates a previously bookmarked room and 
@@ -300,6 +314,7 @@ def remove_bookmark(room, user, session):
         room_id=room.id, user_id=user.id).delete()
     session.commit()
     return
+
 
 def remove_room(room, session):
     '''
