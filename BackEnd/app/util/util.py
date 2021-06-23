@@ -278,7 +278,7 @@ def download_json_data(endpoint):
 
 def set_landlord_data(app,aws_landlord_endpoint):
     landlord_data = download_json_data(aws_landlord_endpoint)
-    landlord_data.sort(key=lambda elem: datetime.now() if elem['availability'].lower() == ["today","now"] else datetime.strptime(elem['availability'],'%m/%d/%Y'))
+    landlord_data.sort(key=lambda elem: datetime.now() if elem['availability'].lower() in ["today","now"] else datetime.strptime(elem['availability'],'%m/%d/%Y'))
     app.config["LANDLORD_DB"] = landlord_data
 
 def generate_user_login_data(user,test=False):
