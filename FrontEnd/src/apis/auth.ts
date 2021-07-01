@@ -52,7 +52,7 @@ export const login = async (
       phone,
       unsupportedDomain: false,
     };
-  } catch (err) {
+  } catch (err) {// todo, catch specific error for unsupportedDomain error popup
     return { unsupportedDomain: true };
   }
 };

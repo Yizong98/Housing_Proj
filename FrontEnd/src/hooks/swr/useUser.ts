@@ -7,6 +7,9 @@ import {
   createUser as createUserAPI,
 } from '@apis';
 import { User } from '@models';
+import { useDispatch } from 'react-redux';
+import { showUnsupportedDomainPopup } from '@redux';
+import { TriggerButtonGA } from '@components/ga';
 
 /**
  * SWR hook to access user data. Also provides helpful functions to login,
@@ -16,6 +19,7 @@ import { User } from '@models';
  */
 const useUser = () => {
   const { data, error, isValidating, mutate } = useSWR('/api/user', getCurUser);
+  const dispatch = useDispatch();
 
   // user is only logged in if there is NO ERROR and we have the appropriate user information.
   // explicitly check that `data.name` exists since `data` might exist with `data.message` for
@@ -31,12 +35,17 @@ const useUser = () => {
   const login = async (googleLoginToken: string) => {
     const data = await loginAPI(googleLoginToken);
 
+    // Unsupported Domain Handler, Popup is shown when user tries registering with
+    // non-ucsd email. Update data if user pre-exists.
     if (data.unsupportedDomain) {
-      // TODO unhandled, here is where the popup should occur...
-      throw Error();
+      TriggerButtonGA('Button', 'Click', 'LogInNotSupported');
+      dispatch(showUnsupportedDomainPopup());
+      console.log("Unsupported Domain");
+    }
+    else if (!data.isNewUser){
+      mutate(data);
     }
 
-    if (data && !data.isNewUser) mutate(data);
     return data;
   };
 
