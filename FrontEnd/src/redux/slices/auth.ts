@@ -5,12 +5,14 @@ import { User, UserNameEmail } from '@models';
 interface AuthState {
   shouldShowLogin: boolean;
   shouldShowDomainPopup: boolean;
+  shouldShowReportIssue: boolean;
   showNewUserPopup?: UserNameEmail;
 }
 
 const initialState: AuthState = {
   shouldShowLogin: false,
   shouldShowDomainPopup: false,
+  shouldShowReportIssue: false,
   showNewUserPopup: undefined,
 };
 
@@ -38,6 +40,12 @@ export const authSlice = createSlice({
     hideLogin: (state) => {
       state.shouldShowLogin = false;
     },
+    showReportIssue: (state) => {
+      state.shouldShowReportIssue = true;
+    },
+    hideReportIssue: (state) => {
+      state.shouldShowReportIssue = false;
+    },
     showUnsupportedDomainPopup: (state) => {
       state.shouldShowDomainPopup = true;
     },
@@ -55,6 +63,8 @@ export const {
   endNewUserFlow,
   showLogin,
   hideLogin,
+  showReportIssue,
+  hideReportIssue,
   showUnsupportedDomainPopup,
   hideUnsupportedDomainPopup,
 } = authSlice.actions;
@@ -67,6 +77,9 @@ export const useShouldShowLogin = () => {
 };
 export const useShowNewUserPopup = () => {
   return useSelector((state) => state.auth.showNewUserPopup);
+};
+export const useShowReportIssue = () => {
+  return useSelector((state) => state.auth.shouldShowReportIssue);
 };
 export const useShowUnsupportedDomainPopup = () => {
   return useSelector((state) => state.auth.shouldShowDomainPopup);

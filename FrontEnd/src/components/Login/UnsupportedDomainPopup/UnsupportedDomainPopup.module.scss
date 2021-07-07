@@ -1,18 +1,86 @@
 .wrapper {
-    display: flex;
-    flex-direction: column;
-    padding: 1rem;
-  }
-  
-  .loginImg {
-    width: 7.0625rem;
-    height: 4.8125rem;
-  }
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 2rem;
+}
 
-  .firstMessage {
-    padding-top: 8px;
-    padding-bottom: 8px;
-    font-weight: bold;
-    font-size: 20px;
-  }
-  
+.loginImg {
+  width: 7.0625rem;
+  height: 4.8125rem;
+}
+
+.firstMessage {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.secondMessage {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  text-align: center;
+  letter-spacing: 0.025em;
+}
+
+.bottomRowButtons {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  margin-top: 24px;
+}
+
+.reportIssue {
+  color: #797979;
+}
+
+.messages {
+  text-align: center;
+  align-content: center;
+}
+
+.reportIssueWrapper {
+  // display: flex;
+  text-align: center;
+  flex-direction: column;
+  align-content: center;
+  // align-content: center;
+}
+
+.reportIssueLabel {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  letter-spacing: none;
+  padding-bottom: 12px;
+}
+
+.wrenchIcon {
+  overflow: hidden;
+  position: static;
+  order: 0;
+}
+
+.wrenchIconCaption {
+  // position: static;
+  text-overflow: hidden;
+}
+
+.input[type='text'],
+.input[type='text']:focus {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 150%;
+  padding: 13px 40px;
+
+  padding-top: 10;
+
+  letter-spacing: 0.025em;
+
+  color: #797979;
+}
