@@ -2,6 +2,7 @@ import json
 from flask import session
 from app.util.util import *
 from app.assets.request_message_map import *
+import app.util.aws.s3 as s3
 import pytest
 
 @pytest.mark.parametrize(
@@ -268,7 +269,7 @@ def test_single_logout(client, login_first, corrupt_cookie, email, correct_respo
                       "phone": "858-777-2345",
                       "schoolYear": "Grad",
                       "major": "MARVEL SCIENCE",
-                      "profile_photo": "user5/profile/headshot.jpg",
+                      "profilePhoto": "test_user5/profile/headshot.jpg",
                       "message": "Welcome to be a new HOMIE! CONGRATS!"
              },
             201
@@ -331,7 +332,7 @@ def test_single_logout(client, login_first, corrupt_cookie, email, correct_respo
                                  "description": "YOU COULD NOT LIVE WITH YOUR OWN FAILURE, AND WHERE DID THAT BRING YOU? BACK TO ME",
                                  "phone": "858-777-2345",
                                  "major": "MARVEL SCIENCE",
-                                 "profile_photo": "dummy.jpg"
+                                 "profilePhoto": "dummy.jpg"
                                  }), "content_type": "application/json"},
             {"message":
              "JSON is not complete. Did you bypass the frontend? How did you find us? SURPRISING PIKACHU FACE"},
@@ -423,7 +424,7 @@ def test_create_user(client, email, login_first, corrupt_cookie, json_query, cor
                       "phone": "858-777-2345",
                       "schoolYear": "Grad",
                       "major": "MARVEL SCIENCE",
-                      "profile_photo": "user5/profile/headshot.jpg",
+                      "profilePhoto": "test_user5/profile/headshot.jpg",
                       "message": "Welcome to be a new HOMIE! CONGRATS!"
              },
             201
@@ -445,7 +446,7 @@ def test_create_user(client, email, login_first, corrupt_cookie, json_query, cor
                       "phone": "858-777-2345",
                       "schoolYear": "Grad",
                       "major": "MARVEL SCIENCE",
-                      "profile_photo": "user5/profile/headshot.jpg",
+                      "profilePhoto": "test_user5/profile/headshot.jpg",
                       "message": "Welcome to be a new HOMIE! CONGRATS!"
              },
             201
@@ -473,3 +474,7 @@ def test_create_user_online(app,client, login_first, online_config, json_query, 
     for key, value in correct_response.items():
         assert response_data[key] == value
     assert rv.status_code == correct_status_code
+    profile_image_array = s3.get_images("test_user5",category="profile")
+    assert len(profile_image_array) == 1
+    assert profile_image_array[0] == "test_user5/profile/headshot.jpg"
+    s3.delete_file_wname("test_user5/profile/headshot.jpg","houseit")

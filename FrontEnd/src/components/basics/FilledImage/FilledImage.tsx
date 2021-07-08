@@ -11,7 +11,7 @@ interface Props
   alt?: string;
 }
 
-const Image: FunctionComponent<Props> = ({
+const FilledImage: FunctionComponent<Props> = ({
   src,
   alt,
   className,
@@ -19,14 +19,16 @@ const Image: FunctionComponent<Props> = ({
   ...divProps
 }) => {
   return (
-    <div
-      {...divProps}
-      className={cn(styles.image, className)}
-      style={{ backgroundImage: `url("${src}")`, ...style }}
-    >
-      <img src="NA" className={styles.hiddenImage} alt={alt} />
+    <div className={styles.wrapper}>
+      <div
+        {...divProps}
+        className={cn(styles.image, className)}
+        style={{ backgroundImage: `url("${src}")`, ...style }}
+      >
+        <img src="NA" className={styles.hiddenImage} alt={alt} />
+      </div>
     </div>
   );
 };
 
-export default Image;
+export default FilledImage;

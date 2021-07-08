@@ -177,18 +177,22 @@ def create_user():
                             session)
             # update the user id in the session
             login_session["user_id"] = user.id
-            # cris's favorite part: create randome icons
-            icon_path = "app/assets/profile_default_icons/"
-            selected_icon = random.choice(
-                os.listdir(icon_path))
-            photo_path_name = "/".join(["user"+str(user.id),
-                                        "profile", "headshot.jpg"])
             #  upload the image to S3 endpoint if not offline testing
             if current_app.config["OFFLINE_TESTING"] != True:
+                # cris's favorite part: create randome icons
+                icon_path = "app/assets/profile_default_icons/"
+                selected_icon = random.choice(
+                    os.listdir(icon_path))
+                if current_app.config["TESTING"] == True: # if online testing mode
+                    user_prefix = "test_user"
+                else:
+                    user_prefix = "user"
+                photo_path_name = "/".join([user_prefix+str(user.id),
+                                            "profile", "headshot.jpg"])
                 upload_file_wname(icon_path+selected_icon,
                                   "houseit", photo_path_name)
             # finally, send the sensitive data to be displayed on frontend/some techie user
-            json_response = generate_user_login_data(user)
+            json_response = generate_user_login_data(user,current_app.config["TESTING"])
             json_response["message"] = "Welcome to be a new HOMIE! CONGRATS!"
             status_code = 201
             response = generate_response(json_response, status_code)

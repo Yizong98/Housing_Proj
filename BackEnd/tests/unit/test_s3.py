@@ -3,7 +3,7 @@ import app.util.aws.s3 as s3
 import boto3
 import io
 
-FILE_NAME = 'test_user/housing/testFile.txt'
+FILE_NAME = 'tests/test_content/testFile.txt'
 OBJ_NAME = 'test_user/housing/testFile.txt'
 BUCKET = 'houseit'
 USER_NAME = 'test_user'
@@ -40,7 +40,7 @@ class TestS3(unittest.TestCase):
         self.assertEqual(s3.delete_folder(PREFIX, BUCKET), True)
 
     def test_get_images(self):
-        self.assertEqual(len(s3.get_images(USER_NAME, unused_category)), 0)
+        self.assertEqual(len(s3.get_images(USER_NAME, UNUSED_CATEGORY)), 0)
 
         # upload 4 jpg/png images
         s3.upload_file_wname(IMG1, BUCKET, USER_NAME + '/housing/1.jpg')
