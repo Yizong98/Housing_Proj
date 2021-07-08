@@ -19,3 +19,4 @@ export { default as RoundArrow } from './roundArrow.svg';
 export { default as LocationIcon } from './location.svg';
 export { default as Logo } from './logo.svg';
 export { default as GoogleLogo } from './GoogleLogo.svg';
+export { default as orangeWrench } from './orangeWrench.svg';

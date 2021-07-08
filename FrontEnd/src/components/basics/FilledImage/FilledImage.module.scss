@@ -1,3 +1,14 @@
+.wrapper {
+  // This wrapper is just necessary for older safari versions.
+  // For some reason, the `background-size: cover;` doesn't
+  // work without this in safari version 13.
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
 .image {
   width: 100%;
   height: 100%;
