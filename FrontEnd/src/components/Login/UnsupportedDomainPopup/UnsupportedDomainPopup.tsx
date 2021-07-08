@@ -65,9 +65,9 @@ const UnsupportedDomainPopupUI: FunctionComponent = () => {
               dispatch(showReportIssue());
             }}
           >
-            <div className={styles.reportIssue}>
+            {/* <div className={styles.reportIssue}>
               <Body2>Report an issue</Body2>
-            </div>
+            </div> */}
           </Button>
           <Button
             size="secondary"
@@ -146,7 +146,7 @@ const UnsupportedDomainPopup: FunctionComponent = () => {
   return (
     <>
       <UnsupportedDomainPopupUI />
-      <AfterReportIssueUI />
+      {/* <AfterReportIssueUI /> */}
     </>
   );
 };
