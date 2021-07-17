@@ -61,5 +61,5 @@ export * from './Body2';
 export { default as Amenities } from './Amenities';
 export * from './Amenities';
 
-export { default as Calendar } from './Calendar';
-export * from './Calendar';
+export { default as DatePicker } from './DatePicker';
+export * from './DatePicker';

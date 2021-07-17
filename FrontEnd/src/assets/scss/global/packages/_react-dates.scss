@@ -18,8 +18,8 @@
 }
 
 .CalendarDay__selected_span {
-  background: $primary-50-color; //background
-  color: $black-color; //text
+  background: $primary-50-color;
+  color: $black-color;
   border: none;
   &:active,
   &:hover,
@@ -29,7 +29,6 @@
   }
 }
 
-// Will edit selected date or the endpoints of a range of dates
 .CalendarDay__selected,
 .CalendarDay__selected:active,
 .CalendarDay__selected:hover {
