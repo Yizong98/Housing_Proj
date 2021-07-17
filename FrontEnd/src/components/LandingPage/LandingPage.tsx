@@ -4,7 +4,7 @@ import { landingIcons } from '@icons';
 import styles from './LandingPage.module.scss';
 import Button from '@components/basics/Button';
 import { useRouter } from 'next/dist/client/router';
-import { TriggerPageView } from  '@components/ga'
+import { TriggerPageView } from '@components/ga';
 
 const HomehubWelcomeInfo: FunctionComponent = () => {
   const router = useRouter();
@@ -12,9 +12,9 @@ const HomehubWelcomeInfo: FunctionComponent = () => {
     router.push('/housing', undefined, { shallow: true });
   };
 
-  useEffect(()=>{
-    TriggerPageView('landing_page')
-  }, [])
+  useEffect(() => {
+    TriggerPageView('landing_page');
+  }, []);
 
   return (
     <div className={styles.title}>

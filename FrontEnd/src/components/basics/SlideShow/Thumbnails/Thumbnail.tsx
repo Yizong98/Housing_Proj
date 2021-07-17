@@ -2,12 +2,12 @@ import React, { FunctionComponent } from 'react';
 import { SlideShowItem } from '../SlideShow';
 import styles from './Thumbnails.module.scss';
 import cn from 'classnames';
-import { Button, FilledImage } from '@basics';
+import { FilledImage } from '@basics';
 
 interface ThumbnailProps
   extends React.DetailedHTMLProps<
-    React.HTMLAttributes<HTMLButtonElement>,
-    HTMLButtonElement
+    React.HTMLAttributes<HTMLDivElement>,
+    HTMLDivElement
   > {
   image: SlideShowItem;
   active?: boolean;
@@ -17,21 +17,20 @@ const Thumbnail: FunctionComponent<ThumbnailProps> = ({
   image,
   active,
   className,
-  ...buttonProps
+  ...divProps
 }) => (
-  <Button
-    variant="wrapper"
-    {...buttonProps}
+  <div
+    {...divProps}
     className={cn(
       className,
       {
         [styles.selectedPreview]: !active,
       },
-      'd-flex',
+      styles.clickable,
     )}
   >
     <FilledImage src={image.src} alt={image.alt} />
-  </Button>
+  </div>
 );
 
 export default Thumbnail;

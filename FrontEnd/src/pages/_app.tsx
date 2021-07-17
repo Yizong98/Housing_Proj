@@ -1,12 +1,12 @@
 import React, { FunctionComponent, useEffect } from 'react';
 import type { AppProps } from 'next/app';
-import Head from 'next/head';
 import { reduxNextWrapper } from '@redux';
 import Login from '@components/Login';
 import '../assets/scss/global/index.scss';
 import Layout from '@components/Layout';
 import { InitGA } from '@components/ga';
 import TagManager from 'react-gtm-module';
+import { Head as DefaultHead } from '@basics';
 
 const App: FunctionComponent<AppProps> = ({ Component, pageProps }) => {
   const tagManagerArgs = {
@@ -23,10 +23,7 @@ const App: FunctionComponent<AppProps> = ({ Component, pageProps }) => {
 
   return (
     <>
-      <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Homehub</title>
-      </Head>
+      <DefaultHead />
 
       <Login />
 

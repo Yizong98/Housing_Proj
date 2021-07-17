@@ -1,8 +1,13 @@
+.clickable {
+  cursor: pointer;
+  display: flex;
+}
+
 .thumbnail {
   height: 20%;
   display: flex;
   overflow-x: auto;
-  background-color: #EEE;
+  background-color: #eee;
 
   & button {
     min-width: 20%;

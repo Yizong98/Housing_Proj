@@ -1,9 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { CarouselItem, CarouselItemProps } from 'reactstrap';
 import cn from 'classnames';
-import Image from '../../FilledImage/FilledImage';
+import { FilledImage } from '@basics';
 import styles from './SlideShowItem.module.scss';
-import { Button } from '@basics';
 
 interface SlideShowItemProps extends CarouselItemProps {
   src: string;
@@ -18,7 +17,7 @@ const SlideShowItem: FunctionComponent<SlideShowItemProps> = ({
   className,
   ...carouselItemProps
 }) => {
-  const imageElement = <Image src={src} alt={alt} />;
+  const imageElement = <FilledImage src={src} alt={alt} />; // Will be reused in two spots below
 
   return (
     <CarouselItem
@@ -27,14 +26,13 @@ const SlideShowItem: FunctionComponent<SlideShowItemProps> = ({
       className={cn(styles.item, className)}
     >
       {onClick ? (
-        <Button
-          variant="wrapper"
-          className="w-100 h-100 d-flex"
+        <div
+          className={styles.wrapper}
           onClick={onClick}
           onKeyDown={({ key }) => key === 'Enter' && onClick()}
         >
           {imageElement}
-        </Button>
+        </div>
       ) : (
         imageElement
       )}

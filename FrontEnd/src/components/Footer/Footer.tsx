@@ -64,13 +64,13 @@ const ThirdColumn: FunctionComponent = () => (
   <div className={cn(styles.marginBottomProvider, styles.homehubOrange)}>
     <Row>
       <Col className={styles.homehubLabel}>
-        <Link href="/" undecorated>
+        <Link href="/housing" undecorated>
           <h4 className={styles.homehubOrange}>Homehub</h4>
         </Link>
       </Col>
 
       <Col className="text-lg-right text-xl-right">
-        <Link href="/" undecorated>
+        <Link href="/housing" undecorated>
           <miscIcons.Logo />
         </Link>
       </Col>

@@ -24,37 +24,35 @@ const NavBar: FunctionComponent = () => {
   ];
 
   return (
-    <>
-      <Navbar sticky="top" className={`${styles.wrapper} p-0 m-0 mb-4`}>
-        <div className={styles.container}>
-          <div className="mr-auto">
-            <a href="/">
-              <landingIcons.logo className={styles.logo} />
-            </a>
-          </div>
-          <Row className="align-items-center">
-            <Link href="/" undecorated>
-              <h5 className="mb-0">About</h5>
-            </Link>
-            {user.isLoggedIn ? (
-              <ImageDropdown
-                items={itemProps}
-                profileIcon={user.profilePhoto}
-                className="ml-4"
-              />
-            ) : (
-              <Button
-                size="secondary"
-                variant="solid"
-                onClick={() => dispatch(showLogin())}
-              >
-                Get Started
-              </Button>
-            )}
-          </Row>
+    <Navbar sticky="top" className={`${styles.wrapper} p-0 m-0 mb-4`}>
+      <div className={styles.container}>
+        <div className="mr-auto">
+          <a href="/housing">
+            <landingIcons.logo className={styles.logo} />
+          </a>
         </div>
-      </Navbar>
-    </>
+        <Row className="align-items-center">
+          <Link href="/" undecorated>
+            <h5 className="mb-0">About</h5>
+          </Link>
+          {user.isLoggedIn ? (
+            <ImageDropdown
+              items={itemProps}
+              profileIcon={user.profilePhoto}
+              className="ml-4"
+            />
+          ) : (
+            <Button
+              size="secondary"
+              variant="solid"
+              onClick={() => dispatch(showLogin())}
+            >
+              Get Started
+            </Button>
+          )}
+        </Row>
+      </div>
+    </Navbar>
   );
 };
 

@@ -7,13 +7,9 @@ body {
   background-color: $background-color;
 }
 
-/**
- * Needed for dropdown toggle... temporary.
- */
 .show > .btn-success.dropdown-toggle {
   background-color: $primary-light-color;
   border-color: $primary-light-color;
-
   &:focus {
     box-shadow: none;
   }

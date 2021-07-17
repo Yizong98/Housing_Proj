@@ -1,0 +1,58 @@
+.DayPickerNavigation_svg__horizontal {
+  fill: $primary-300-color !important;
+}
+
+.CalendarDay__default:hover {
+  background: $primary-50-color !important;
+  border: none !important;
+}
+
+.CalendarDay {
+  border: none !important;
+}
+
+.CalendarDay__blocked_out_of_range,
+.CalendarDay__blocked_out_of_range:active,
+.CalendarDay__blocked_out_of_range:hover {
+  background: #fff !important;
+}
+
+.CalendarDay__selected_span {
+  background: $primary-50-color !important;
+  color: $black-color !important;
+  border: none !important;
+  &:active,
+  &:hover,
+  &:focus {
+    border: none !important;
+    background: $primary-300-color !important;
+  }
+}
+
+.CalendarDay__selected,
+.CalendarDay__selected:active,
+.CalendarDay__selected:hover {
+  background: $primary-300-color !important;
+  color: $black-color !important;
+  border: none !important;
+  border-radius: 1.875rem !important;
+}
+
+.CalendarDay__hovered_span:hover,
+.CalendarDay__hovered_span {
+  background: $primary-50-color !important;
+  color: $black-color !important;
+  border: none !important;
+}
+
+.DayPickerKeyboardShortcuts_buttonReset {
+  display: none !important;
+}
+
+.DateInput_input__focused {
+  border-bottom-color: $primary-300-color !important;
+}
+
+.DateInput_input {
+  text-align: center !important;
+}

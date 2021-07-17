@@ -15,9 +15,17 @@ interface PathProps {
   images: SlideShowItem[];
   onImageClick?: (index: number) => any;
   className?: string;
-  showPreview?: boolean;
+  showPreview?: boolean; // Show the preview of images at the bottom of the slideshow
 }
 
+/**
+ * SlideShow provides a slideshow of the provided images as
+ * filled images. Can also provide a preview of the images at
+ * the bottom of the slideshow.
+ *
+ * Will not display indicators/arrows/preview if only a single
+ * image is provided.
+ */
 const SlideShow: FunctionComponent<PathProps> = ({
   images,
   onImageClick,
@@ -33,10 +41,10 @@ const SlideShow: FunctionComponent<PathProps> = ({
       <Carousel
         activeIndex={activeIndex}
         onSelect={setActiveIndex}
-        nextIcon={<carouselIcons.rightArrow />}
-        prevIcon={<carouselIcons.leftArrow />}
+        nextIcon={images.length > 1 ? <carouselIcons.rightArrow /> : null}
+        prevIcon={images.length > 1 ? <carouselIcons.leftArrow /> : null}
         interval={null} // no interval
-        indicators={!showPreview}
+        indicators={!showPreview && images.length > 1}
         className={cn({
           [styles.preview]: showPreview,
           [styles.carouselOverflow]: images?.length > 5,

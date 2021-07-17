@@ -4,6 +4,7 @@ import GeneralInfo from './GeneralInfo/GeneralInfo';
 import PlaceDetails from './PlaceDetails/PlaceDetails';
 import ApplicationDetails from './ApplicationDetails/ApplicationDetails';
 import styles from './HouseProfile.module.scss';
+import { Head } from '@basics';
 
 interface HouseProfileProps {
   roomId: number;
@@ -17,7 +18,12 @@ const HouseProfile: FunctionComponent<HouseProfileProps> = ({ roomId }) => {
   }
 
   if (!data) {
-    return <div>Loading...</div>; // TODO add a loader
+    return (
+      <>
+        <Head title="Loading Place..." />
+        <div>Loading...</div>; // TODO add a loader
+      </>
+    );
   }
 
   const { address, name, distance, images } = data;
@@ -28,22 +34,26 @@ const HouseProfile: FunctionComponent<HouseProfileProps> = ({ roomId }) => {
   }));
 
   return (
-    <div className="px-md-0 px-3">
-      <div className={styles.section}>
-        <GeneralInfo
-          images={slideShowItems}
-          address={address}
-          distance={distance}
-          name={name}
-        />
-      </div>
+    <>
+      <Head title={name} />
 
-      <div className={styles.section}>
-        <PlaceDetails roomId={roomId} />
-      </div>
+      <div className="px-md-0 px-3">
+        <div className={styles.section}>
+          <GeneralInfo
+            images={slideShowItems}
+            address={address}
+            distance={distance}
+            name={name}
+          />
+        </div>
 
-      <ApplicationDetails roomId={roomId} />
-    </div>
+        <div className={styles.section}>
+          <PlaceDetails roomId={roomId} />
+        </div>
+
+        <ApplicationDetails roomId={roomId} />
+      </div>
+    </>
   );
 };
 

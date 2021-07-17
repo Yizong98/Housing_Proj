@@ -1,6 +1,9 @@
 .image {
+  // needed to make the image fill all height/width by default
   width: 100%;
   height: 100%;
+
+  // Fill but don't stretch image: https://stackoverflow.com/questions/11757537/css-image-size-how-to-fill-but-not-stretch/11763434#11763434
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 50% 50%;
