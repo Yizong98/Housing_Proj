@@ -3,56 +3,56 @@
 }
 
 .CalendarDay__default:hover {
-  background: $primary-50-color;
-  border: none;
+  background: $primary-50-color !important;
+  border: none !important;
 }
 
 .CalendarDay {
-  border: none;
+  border: none !important;
 }
 
 .CalendarDay__blocked_out_of_range,
 .CalendarDay__blocked_out_of_range:active,
 .CalendarDay__blocked_out_of_range:hover {
-  background: #fff;
+  background: #fff !important;
 }
 
 .CalendarDay__selected_span {
-  background: $primary-50-color;
-  color: $black-color;
-  border: none;
+  background: $primary-50-color !important;
+  color: $black-color !important;
+  border: none !important;
   &:active,
   &:hover,
   &:focus {
-    border: none;
-    background: $primary-300-color;
+    border: none !important;
+    background: $primary-300-color !important;
   }
 }
 
 .CalendarDay__selected,
 .CalendarDay__selected:active,
 .CalendarDay__selected:hover {
-  background: $primary-300-color;
-  color: $black-color;
+  background: $primary-300-color !important;
+  color: $black-color !important;
   border: none !important;
-  border-radius: 1.875rem;
+  border-radius: 1.875rem !important;
 }
 
 .CalendarDay__hovered_span:hover,
 .CalendarDay__hovered_span {
-  background: $primary-50-color;
-  color: $black-color;
-  border: none;
+  background: $primary-50-color !important;
+  color: $black-color !important;
+  border: none !important;
 }
 
 .DayPickerKeyboardShortcuts_buttonReset {
-  display: none;
+  display: none !important;
 }
 
 .DateInput_input__focused {
-  border-bottom-color: $primary-300-color;
+  border-bottom-color: $primary-300-color !important;
 }
 
 .DateInput_input {
-  text-align: center;
+  text-align: center !important;
 }
